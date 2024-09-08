@@ -1,8 +1,41 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@font-face{
+    font-family: "Suisse Int'l Mono";
+    src: url("../fonts/008acf881eac29f0c639b8e2345a1764.eot");
+    src: url("../fonts/008acf881eac29f0c639b8e2345a1764.eot?#iefix")format("embedded-opentype"),
+        url("../fonts/008acf881eac29f0c639b8e2345a1764.woff")format("woff"),
+        url("../fonts/008acf881eac29f0c639b8e2345a1764.woff2")format("woff2"),
+        url("../fonts/008acf881eac29f0c639b8e2345a1764.ttf")format("truetype"),
+        url("../fonts/008acf881eac29f0c639b8e2345a1764.svg#Suisse Int'l Mono")format("svg");
+    font-weight:normal;
+    font-style:normal;
+    font-display:swap;
+}
+
+@font-face {
+    font-family: 'Formula Condensed Light';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Formula Condensed Light'), url('../fonts/FormulaCondensed-Light.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'Formula Condensed Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Formula Condensed Bold'), url('../fonts/FormulaCondensed-Bold.woff') format('woff');
+}
 
 * {
-    font-family: 'Noto Sans', sans-serif, serif;
     box-sizing: border-box;
+}
+
+h1, h2, h3 {
+    font-family: 'Formula Condensed Bold', sans-serif, serif;
+}
+
+p, a {
+    font-family: "Suisse Int'l Mono";
 }
 
 body {
