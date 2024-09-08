@@ -1,44 +1,66 @@
 .main {
-    background: url(../../assets/wp.jpg);
-    background-position: center;
-    background-size: cover;
     min-height: 88.3vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
 }
 
 .main h1 {
     font-size: 80px;
     font-weight: 900;
-    line-height: 5rem;
-    color: white;
     padding: 2rem;
-    text-shadow: 1px 2px 10px black;
-    background-color: black;
+    background-color: #E8E0D3;
+    vertical-align: middle;
     align-self: stretch;
     text-align: center;
     margin: 0;
 }
 
-.para {
+.flex {
+    display: flex;
+    max-width: 1200px;
+}
+
+.heroImg {
+    width: 50vw;
+    min-height: 500px;
+    background: url(../../assets/wp.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.section {
+    background-color: #E8E0D3;
+    padding: 2rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+}
+
+.section h2 {
+    font-size: 2.2rem;
     margin: 0;
-    color: white;
+}
+
+.para {
+    color: rgb(84, 84, 84);
+    margin: 0;
     max-width: 400px;
-    padding: 1rem;
 }
 
 .main a {
-    font-size: 30px;
     color: white;
-    text-decoration: none;
-    background-color: #93032E;
-    padding: 1rem;
+    background-color: #212121;
+    padding: 0.5rem 1rem;
     border-radius: 5px;
-    font-weight: bold;
+    width: fit-content;
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .main a:hover {
+    background-color: #fff;
+    color: black;
     opacity: 0.85;
-}
+} 
