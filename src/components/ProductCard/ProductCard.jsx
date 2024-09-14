@@ -13,7 +13,7 @@ function ProductCard({ image, price, title, description, id, handleAddToCart}) {
         <h3 className={styles.title}>{title.toUpperCase()}</h3>
       </div>
       <img src={image} alt={description} className={styles.image} />
-      <button onClick={handleAddToCart}>ADD - {price}$</button>
+      <div className={styles.buttonContainer}><button onClick={handleAddToCart}>ADD - {price}$</button></div>
     </Link>
   );
 }

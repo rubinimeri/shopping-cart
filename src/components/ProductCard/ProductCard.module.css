@@ -19,10 +19,6 @@
     color: white;
     padding: 12px;
     background-color: #202020;
-    position: absolute;
-    z-index: 1;
-    left: 42%;
-    top: 90%;
     transition: background-color 0.5s ease, color 0.5s ease;
     cursor: pointer;
 }
@@ -30,4 +26,12 @@
 .productLink button:hover {
     background-color: #fff;
     color: black;
+}
+
+.buttonContainer {
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    bottom: 3rem;
+    text-align: center;
 }
