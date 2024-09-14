@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom"
 import Navbar from "./components/Navbar/Navbar"
 import Cart from "./components/Cart/Cart"
+import Footer from "./components/Footer/Footer"
 
 import './styles/App.css'
 import { useState } from "react"
@@ -28,6 +29,7 @@ function App() {
       setCart={setCart}
       handleCartVisibilityChange={handleCartVisibilityChange}
       cartVisibility={cartVisibility} />
+      <Footer />
     </>
   )
 }

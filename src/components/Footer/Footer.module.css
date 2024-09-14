@@ -1,0 +1,22 @@
+.footer {
+    background-color: #012928;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+.footer h2 {
+    font-size: 35px;
+    color: white;
+    margin: 0;
+}
+
+.footer path {
+    fill: white;
+}
+
+.footer p, .footer a {
+    color: #96A49F;
+}
