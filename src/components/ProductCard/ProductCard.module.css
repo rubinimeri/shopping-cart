@@ -1,0 +1,33 @@
+.image {
+    max-width: 100%;
+}
+
+.productLink {
+    background-color: #E8E0D3;
+    text-align: center;
+    text-decoration: none;
+    position: relative;
+}
+
+.title {
+    color: black;
+    font-size: 22px;
+}
+
+.productLink button {
+    border: none;
+    color: white;
+    padding: 12px;
+    background-color: #202020;
+    position: absolute;
+    z-index: 1;
+    left: 42%;
+    top: 90%;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    cursor: pointer;
+}
+
+.productLink button:hover {
+    background-color: #fff;
+    color: black;
+}
