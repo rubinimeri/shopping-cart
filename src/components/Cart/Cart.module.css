@@ -11,7 +11,7 @@
     overflow: auto;
     scrollbar-width: 0;
     transition: right 1s ease; /* Define the sliding animation */
-    z-index: 2;
+    z-index: 9999;
 }
 
 .flex button {

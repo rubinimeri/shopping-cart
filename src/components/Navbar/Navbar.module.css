@@ -1,5 +1,9 @@
 .navbar {
-    background-color: #f0effd;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+    background-color: white;
     padding: 1.5rem;
 }
 
