@@ -1,0 +1,41 @@
+.cartItem {
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: gray 1px solid;
+}
+
+.cartItem input {
+    max-width: 2rem;
+    text-align: center;
+    height: max-content;
+    border: none;
+    outline: none;
+}
+
+.quantity button {
+    border: none;
+    background: white;
+}
+
+.imageContainer {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.cartItem img {
+    max-width: 150px;
+}
+
+.qty {
+    display: flex;
+}
+
+.qty > button {
+    background: none;
+}
+
+.qtyInput {
+    border: 1px solid;
+}
