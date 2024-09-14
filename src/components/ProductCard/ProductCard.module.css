@@ -1,12 +1,14 @@
 .image {
-    max-width: 100%;
+    max-width: 400px;
 }
 
 .productLink {
-    background-color: #E8E0D3;
+    padding: 1rem;
+    background-color: white;
     text-align: center;
     text-decoration: none;
     position: relative;
+    overflow: hidden;
 }
 
 .title {
