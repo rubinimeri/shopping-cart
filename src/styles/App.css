@@ -30,15 +30,37 @@
     box-sizing: border-box;
 }
 
-h1, h2, h3 {
+h1, h2, h3, li {
     font-family: 'Formula Condensed Bold', sans-serif, serif;
 }
 
-p, a {
+p, a, input, button {
     font-family: "Suisse Int'l Mono";
 }
 
 body {
     min-height: 100vh;
     margin: 0;
+}
+
+.overlay {
+    position: fixed; /* Sit on top of the page content */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2;
+    animation: overlay 0.5s ease alternate;
+}
+
+@keyframes overlay {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
