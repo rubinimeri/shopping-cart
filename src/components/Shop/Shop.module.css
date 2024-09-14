@@ -1,0 +1,58 @@
+.main {
+    min-height: 100vh;
+    background-color: #FAF6EE;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    gap: 2rem;
+}
+
+.reviews {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 12px;
+}
+
+.review {
+    margin: 0;
+}
+
+.titleContainer h1 {
+    font-size: 120px;
+    margin: 0;
+}
+
+.titleContainer h2 {
+    text-align: center;
+    height: fit-content;
+    margin: 0;
+    font-size: 35px;
+}
+
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    gap: 2.4rem;
+/*     padding: 1rem 0; */
+}
+
+.categories li {
+    font-size: 1.6rem;
+    font-weight: bold;
+    padding: 6px;
+}
+
+.active {
+    color: #FAF6EE;
+    background-color: black;
+}
+
+.productList {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(400px, 1fr) );
+    gap: 6px;
+}
