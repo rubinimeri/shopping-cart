@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
 import styles from "./Navbar.module.css"
 
-function Navbar({ cartCount = 0 }) {
+function Navbar({ cartCount = 0, handleCartVisibilityChange }) {
   const { pathname } = useLocation();
 
   return (
@@ -60,7 +60,9 @@ function Navbar({ cartCount = 0 }) {
               <Link className={pathname === '/shop' ? styles.active : ''} to="/shop">Shop</Link>
             </li>
             <li className={styles.cartContainer}>
-              <Link className={pathname === '/cart' ? styles.active : ''} to="/cart">
+              <Link 
+              onClick={handleCartVisibilityChange}
+              to="#">
                 <i className="fa-solid fa-cart-shopping"></i>
                 <span>{cartCount}</span>
               </Link>
@@ -73,6 +75,7 @@ function Navbar({ cartCount = 0 }) {
 
 Navbar.propTypes = {
   cartCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  handleCartVisibilityChange: PropTypes.func
 };
 
 export default Navbar;
