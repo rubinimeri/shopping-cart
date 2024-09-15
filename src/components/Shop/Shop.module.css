@@ -20,6 +20,7 @@
 
 .titleContainer h1 {
     font-size: 120px;
+    text-align: center;
     margin: 0;
 }
 
@@ -32,8 +33,8 @@
 
 .categories {
     position: sticky;
-    top: 11.6vh;
-    width: 100%;
+    top: 102px;
+    width: 95vw;
     padding: 1rem;
     display: flex;
     flex-wrap: wrap;
@@ -65,7 +66,7 @@
 .productList {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat( auto-fit, minmax(400px, 1fr) );
-    grid-auto-rows: 500px;
+    grid-template-columns: repeat( auto-fit, minmax(350px, 1fr) );
+    grid-auto-rows: 450px;
     gap: 1rem;
 }
