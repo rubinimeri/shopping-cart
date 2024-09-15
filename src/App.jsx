@@ -10,6 +10,24 @@ function App() {
   const [cart, setCart] = useState([]);
   const [cartVisibility, setCartVisibilty] = useState(false);
 
+  function addToCart(id, products, quantity) {
+    const checkProduct = cart.find(product => product.id == id);
+
+    if(checkProduct) {
+      const productIndex = cart.findIndex(product => product.id == id)
+      const cartClone = [...cart];
+      cartClone[productIndex].quantity += quantity;
+      setCart([...cartClone]);
+    } 
+    else {
+      const currentProduct = 
+        Array.isArray(products) ? 
+        products.find(product => product.id == id) :
+        products
+      setCart([...cart, {...currentProduct, quantity: quantity}])
+    } 
+  }
+
   function handleCartVisibilityChange(e) {
     e.preventDefault();
     setCartVisibilty(!cartVisibility)
@@ -23,7 +41,7 @@ function App() {
       <Navbar
       cartCount={cart.length}
       handleCartVisibilityChange={handleCartVisibilityChange} />
-      <Outlet context={[cart, setCart]} />
+      <Outlet context={addToCart} />
       <Cart
       cart={cart}
       setCart={setCart}

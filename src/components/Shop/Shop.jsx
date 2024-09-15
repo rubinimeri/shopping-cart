@@ -30,25 +30,14 @@ const useProducts = () => {
 function Shop() {
   const { products, loading, error } = useProducts();
   const [category, setCategory] = useState("men's clothing");
-  const [cart, setCart] = useOutletContext();
+  const addToCart = useOutletContext();
 
   function handleAddToCart(e) {
     e.preventDefault();
     const { id } = e.target.closest('a');
-    
-    const checkProduct = cart.find(product => product.id == id);
+    const QUANTITY = 1;
 
-    if(checkProduct) {
-      const productIndex = cart.findIndex(product => product.id == id)
-      const cartClone = [...cart];
-      cartClone[productIndex].quantity += 1;
-
-      setCart([...cartClone]);
-    } 
-    else {
-      const currentProduct = products.find(product => product.id == id)
-      setCart([...cart, {...currentProduct, quantity: 1}])
-    } 
+    addToCart(id, products, QUANTITY);
   }
 
   function handleCategoryChange(e) {

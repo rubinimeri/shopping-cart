@@ -16,40 +16,39 @@ function Cart({ cart, setCart, cartVisibility, handleCartVisibilityChange }) {
         setCart(cart.filter(product => product.id !== id))
     }
 
+    function handleCartOperations(currentProduct, operationType, value) {
+        currentProduct.quantity = 
+            operationType === 'decrement' ?
+            currentProduct.quantity - 1 :
+            operationType === 'increment' ?
+            currentProduct.quantity + 1 :
+            parseInt(value)
+        
+        const cartClone = [...cart];
+        const productIndex = cart.findIndex(product => product.id === currentProduct.id);
+        cartClone[productIndex] = currentProduct;
+
+        setCart([...cartClone]);
+    }
+
     function handleQuantityChange(id, value) {
         if(value === '' || value <= 0) return
 
         const product = cart.find(product => product.id === id);
-        product.quantity = parseInt(value);
-
-        const cartClone = [...cart];
-        const productIndex = cart.findIndex(product => product.id === id);
-        cartClone[productIndex] = product;
-
-        setCart([...cartClone]);
+        const OPERATION_TYPE = 'change';
+        handleCartOperations(product, OPERATION_TYPE, value)
     }
 
     function handleQuantityIncrement(id) {
-        
         const product = cart.find(product => product.id === id);
-        product.quantity += 1;
-
-        const cartClone = [...cart];
-        const productIndex = cart.findIndex(product => product.id === id);
-        cartClone[productIndex] = product;
-
-        setCart([...cartClone]);
+        const OPERATION_TYPE = 'increment';
+        handleCartOperations(product, OPERATION_TYPE)
     }
 
     function handleQuantityDecrement(id) {
         const product = cart.find(product => product.id === id);
-        product.quantity -= 1;
-
-        const cartClone = [...cart];
-        const productIndex = cart.findIndex(product => product.id === id);
-        cartClone[productIndex] = product;
-
-        setCart([...cartClone]);
+        const OPERATION_TYPE = 'decrement';
+        handleCartOperations(product, OPERATION_TYPE);
     }
 
     return (

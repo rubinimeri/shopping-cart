@@ -27,7 +27,7 @@ function ProductPage() {
   const { productId } = useParams();
   const { product, loading, error } = useProduct(productId);
   const [quantity, setQuantity] = useState(1);
-  const [cart, setCart] = useOutletContext();
+  const addToCart = useOutletContext();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -46,19 +46,7 @@ function ProductPage() {
   }
 
   function handleAddToCart() {
-    const checkProduct = cart.find(product => product.id == productId);
-
-    if(checkProduct) {
-      const productIndex = cart.findIndex(product => product.id == productId)
-      const cartClone = [...cart];
-      cartClone[productIndex].quantity += quantity;
-
-      setCart([...cartClone]);
-    } 
-    else 
-      setCart([...cart, {...product, quantity: quantity}])
-
-    console.log(cart);
+    addToCart(productId, product, quantity)
   }
 
 
