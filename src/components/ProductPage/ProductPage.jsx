@@ -35,7 +35,7 @@ function ProductPage() {
 
   function handleQuantityChange(e) {
     const { value } = e.target;
-    setQuantity(parseInt(value));
+    setQuantity(isNaN(parseInt(value)) ? '' : parseInt(value))
   }
 
   function handleIncrementQuantity() {
@@ -47,16 +47,22 @@ function ProductPage() {
   }
 
   function handleAddToCart() {
-    if(!state.cart.some(product => product.id == productId)) 
+    if(!state.cart.some(product => product.id == productId)) {
       dispatch({
         type: "added_to_cart",
         newProduct: product
       })
+      dispatch({
+        type: "changed_product_quantity",
+        productId,
+        quantity: quantity-1
+      })
+    }
     else
       dispatch({
         type: "changed_product_quantity",
         productId,
-        quantity: quantity
+        quantity
       })
   }
 
@@ -80,18 +86,24 @@ function ProductPage() {
         <div className={styles.add}>
           <div className={styles.container}>
             <button 
-            disabled={quantity === 1 ? true : false}
-            onClick={handleDecrementQuantity}>-</button>
+            disabled={isNaN(quantity) || quantity == 0}
+            onClick={handleDecrementQuantity}>
+              -
+            </button>
             <input 
             type="tel" 
             value={quantity}
             onChange={handleQuantityChange}
-            name="quantity" 
-            id="quantity" />
+            />
             <button
-            onClick={handleIncrementQuantity}>+</button>
+            disabled={isNaN(quantity) || quantity == 0}
+            onClick={handleIncrementQuantity}>
+              +
+            </button>
           </div>
-          <Button onClick={handleAddToCart} >
+          <Button
+           isDisabled={isNaN(quantity) || quantity == 0}
+           handleClick={handleAddToCart} >
             ADD
           </Button>
         </div>
