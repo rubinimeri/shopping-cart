@@ -1,4 +1,5 @@
 import CartItem from '../CartItem/CartItem'
+import Button from '../Button/Button'
 import PropTypes from 'prop-types'
 import styles from './Cart.module.css'
 
@@ -70,7 +71,9 @@ function Cart({ state, dispatch, cartVisibility, handleCartVisibilityChange }) {
                     <p>SHIPPING COSTS</p>
                     <p>CALCULATED AT CHECKOUT</p>
                 </div>
-                <button className={styles.buyButton}>ORDER - €{state.cart.length > 0 ? getTotalCost() : 0}</button>
+                <Button classes={styles.buyButton}>
+                    ORDER - €{state.cart.length > 0 ? getTotalCost() : 0}
+                </Button>
             </div>
         </div>
     );

@@ -42,13 +42,5 @@
 .buy .buyButton {
     width: 100%;
     padding: 10px;
-    background-color: #202020;
-    color: white;
-    border: none;
-    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-.buyButton:hover {
-    background-color: white;
-    color: black;
-}

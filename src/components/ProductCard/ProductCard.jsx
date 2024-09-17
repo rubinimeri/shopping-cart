@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./ProductCard.module.css";
 import { useState } from "react";
+import Button from "../Button/Button";
 
 function ProductCard({ image, price, title, description, id, handleAddToCart}) {
   const [added, setAdded] = useState(false);
@@ -24,7 +25,9 @@ function ProductCard({ image, price, title, description, id, handleAddToCart}) {
       <div className={styles.buttonContainer}>
         {added ? 
           <button className={styles.added}>✓</button> :
-          <button onClick={handleClick}>ADD - {price}$</button>}
+          <Button handleClick={handleClick}>
+            ADD - {price}$
+          </Button>}
       </div>
     </Link>
   );

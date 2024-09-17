@@ -1,6 +1,7 @@
 import styles from "./ProductPage.module.css";
 import { useOutletContext, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Button from "../Button/Button";
 
 const useProduct = (productId) => {
   const [product, setProduct] = useState(null);
@@ -90,8 +91,9 @@ function ProductPage() {
             <button
             onClick={handleIncrementQuantity}>+</button>
           </div>
-          <button
-          onClick={handleAddToCart}>ADD</button>
+          <Button onClick={handleAddToCart} >
+            ADD
+          </Button>
         </div>
       </div>
     </main>
