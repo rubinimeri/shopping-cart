@@ -30,14 +30,18 @@ const useProducts = () => {
 function Shop() {
   const { products, loading, error } = useProducts();
   const [category, setCategory] = useState("men's clothing");
-  const addToCart = useOutletContext();
+  const { state, dispatch } = useOutletContext();
 
   function handleAddToCart(e) {
     e.preventDefault();
     const { id } = e.target.closest('a');
-    const QUANTITY = 1;
+    const newProduct = products.find(product => product.id == id)
 
-    addToCart(id, products, QUANTITY);
+    if(!state.cart.some(product => product.id === newProduct.id))
+      dispatch({
+        type: "added_to_cart",
+        newProduct
+      })
   }
 
   function handleCategoryChange(e) {

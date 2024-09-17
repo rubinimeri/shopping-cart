@@ -1,32 +1,17 @@
+import { useReducer, useState } from "react"
 import { Outlet } from "react-router-dom"
 import Navbar from "./components/Navbar/Navbar"
 import Cart from "./components/Cart/Cart"
 import Footer from "./components/Footer/Footer"
+import cartReducer from "./cartReducer"
 
 import './styles/App.css'
-import { useState } from "react"
+
+const initialState = { cart: [] };
 
 function App() {
-  const [cart, setCart] = useState([]);
+  const [state, dispatch] = useReducer(cartReducer, initialState)
   const [cartVisibility, setCartVisibilty] = useState(false);
-
-  function addToCart(id, products, quantity) {
-    const checkProduct = cart.find(product => product.id == id);
-
-    if(checkProduct) {
-      const productIndex = cart.findIndex(product => product.id == id)
-      const cartClone = [...cart];
-      cartClone[productIndex].quantity += quantity;
-      setCart([...cartClone]);
-    } 
-    else {
-      const currentProduct = 
-        Array.isArray(products) ? 
-        products.find(product => product.id == id) :
-        products
-      setCart([...cart, {...currentProduct, quantity: quantity}])
-    } 
-  }
 
   function handleCartVisibilityChange(e) {
     e.preventDefault();
@@ -38,15 +23,23 @@ function App() {
       <div
       style={{display: cartVisibility ? 'block' : 'none'}}
       className="overlay"></div>
+
       <Navbar
-      cartCount={cart.length}
-      handleCartVisibilityChange={handleCartVisibilityChange} />
-      <Outlet context={addToCart} />
+      cartCount={state.cart.length}
+      handleCartVisibilityChange={handleCartVisibilityChange} 
+      />
+
+      <Outlet 
+      context={{state, dispatch}} 
+      />
+
       <Cart
-      cart={cart}
-      setCart={setCart}
+      state={state}
+      dispatch={dispatch}
       handleCartVisibilityChange={handleCartVisibilityChange}
-      cartVisibility={cartVisibility} />
+      cartVisibility={cartVisibility} 
+      />
+
       <Footer />
     </>
   )

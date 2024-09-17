@@ -27,7 +27,7 @@ function ProductPage() {
   const { productId } = useParams();
   const { product, loading, error } = useProduct(productId);
   const [quantity, setQuantity] = useState(1);
-  const addToCart = useOutletContext();
+  const {state, dispatch} = useOutletContext();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -46,7 +46,17 @@ function ProductPage() {
   }
 
   function handleAddToCart() {
-    addToCart(productId, product, quantity)
+    if(!state.cart.some(product => product.id == productId)) 
+      dispatch({
+        type: "added_to_cart",
+        newProduct: product
+      })
+    else
+      dispatch({
+        type: "changed_product_quantity",
+        productId,
+        quantity: quantity
+      })
   }
 
 

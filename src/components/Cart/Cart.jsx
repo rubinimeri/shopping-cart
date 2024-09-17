@@ -2,10 +2,10 @@ import CartItem from '../CartItem/CartItem'
 import PropTypes from 'prop-types'
 import styles from './Cart.module.css'
 
-function Cart({ cart, setCart, cartVisibility, handleCartVisibilityChange }) {
+function Cart({ state, dispatch, cartVisibility, handleCartVisibilityChange }) {
     function getTotalCost() {
         return (
-            cart
+            state.cart
             .map(product => parseInt(product.price) * product.quantity)
             .reduce((a, b) => a + b)
             .toFixed(2)
@@ -13,52 +13,47 @@ function Cart({ cart, setCart, cartVisibility, handleCartVisibilityChange }) {
     }
 
     function handleRemoveFromCart(id) {
-        setCart(cart.filter(product => product.id !== id))
-    }
-
-    function handleCartOperations(currentProduct, operationType, value) {
-        currentProduct.quantity = 
-            operationType === 'decrement' ?
-            currentProduct.quantity - 1 :
-            operationType === 'increment' ?
-            currentProduct.quantity + 1 :
-            parseInt(value)
-        
-        const cartClone = [...cart];
-        const productIndex = cart.findIndex(product => product.id === currentProduct.id);
-        cartClone[productIndex] = currentProduct;
-
-        setCart([...cartClone]);
+        dispatch({
+            type: "deleted_product",
+            productId: id
+        })
     }
 
     function handleQuantityChange(id, value) {
         if(value === '' || value <= 0) return
 
-        const product = cart.find(product => product.id === id);
-        const OPERATION_TYPE = 'change';
-        handleCartOperations(product, OPERATION_TYPE, value)
+        const productId = state.cart.find(product => product.id === id).id;
+        dispatch({
+            type: "changed_product_quantity",
+            productId,
+            quantity: value
+        })
     }
 
     function handleQuantityIncrement(id) {
-        const product = cart.find(product => product.id === id);
-        const OPERATION_TYPE = 'increment';
-        handleCartOperations(product, OPERATION_TYPE)
+        const productId = state.cart.find(product => product.id === id).id;
+        dispatch({
+            type: "incremented_product_quantity",
+            productId
+        })
     }
 
     function handleQuantityDecrement(id) {
-        const product = cart.find(product => product.id === id);
-        const OPERATION_TYPE = 'decrement';
-        handleCartOperations(product, OPERATION_TYPE);
+        const productId = state.cart.find(product => product.id === id).id;
+        dispatch({
+            type: "decremented_product_quantity",
+            productId
+        })
     }
 
     return (
         <div className={`${styles.cart} ${cartVisibility ? styles.cartVisible : styles.cartHidden}`}>
             <div className={styles.flex}>
-                <p>Cart ({cart.length})</p>
+                <p>Cart ({state.cart.length})</p>
                 <button onClick={handleCartVisibilityChange}><i className="fa-solid fa-x"></i></button>
             </div>
             <div className={styles.cartItems}>
-                {cart
+                {state.cart
                     .map(item => 
                         <CartItem 
                         key={item.id}
@@ -75,15 +70,15 @@ function Cart({ cart, setCart, cartVisibility, handleCartVisibilityChange }) {
                     <p>SHIPPING COSTS</p>
                     <p>CALCULATED AT CHECKOUT</p>
                 </div>
-                <button className={styles.buyButton}>ORDER - €{cart.length > 0 ? getTotalCost() : 0}</button>
+                <button className={styles.buyButton}>ORDER - €{state.cart.length > 0 ? getTotalCost() : 0}</button>
             </div>
         </div>
     );
 }
 
 Cart.propTypes = {
-    cart: PropTypes.arrayOf(PropTypes.object),
-    setCart: PropTypes.func,
+    state: PropTypes.object,
+    dispatch: PropTypes.func,
     cartVisibility: PropTypes.bool,
     handleCartVisibilityChange: PropTypes.func
 }
