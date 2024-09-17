@@ -37,3 +37,11 @@
     bottom: 3rem;
     text-align: center;
 }
+
+.productLink .added {
+    background-color: lightgreen;
+    color: black;
+    font-size: 25px;
+    padding: 4px 12px;
+    transition: all 1s ease ;
+}
