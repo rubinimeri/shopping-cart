@@ -12,18 +12,31 @@ export default function cartReducer(state, action) {
         }
       }
       case "changed_product_quantity": {
-        console.log(state)
         return {
           cart: 
            state.cart
            .map(product => {
              if(product.id == action.productId) {
-              product.quantity += action.quantity;
+              product.quantity = action.quantity;
               return product;
              } else {
               return product;
              }
            })
+        }
+      }
+      case "added_to_quantity": {
+        return {
+          cart: 
+          state.cart
+          .map(product => {
+            if(product.id == action.productId) {
+             product.quantity += action.quantity;
+             return product;
+            } else {
+             return product;
+            }
+          })
         }
       }
       case "incremented_product_quantity": {
