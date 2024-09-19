@@ -13,40 +13,6 @@ function Cart({ state, dispatch, cartVisibility, handleCartVisibilityChange }) {
         )
     }
 
-    function handleRemoveFromCart(id) {
-        dispatch({
-            type: "deleted_product",
-            productId: id
-        })
-    }
-
-    function handleQuantityChange(id, value) {
-        if(value === '' || value <= 0) return
-
-        const productId = state.cart.find(product => product.id === id).id;
-        dispatch({
-            type: "changed_product_quantity",
-            productId,
-            quantity: value
-        })
-    }
-
-    function handleQuantityIncrement(id) {
-        const productId = state.cart.find(product => product.id === id).id;
-        dispatch({
-            type: "incremented_product_quantity",
-            productId
-        })
-    }
-
-    function handleQuantityDecrement(id) {
-        const productId = state.cart.find(product => product.id === id).id;
-        dispatch({
-            type: "decremented_product_quantity",
-            productId
-        })
-    }
-
     return (
         <div className={`${styles.cart} ${cartVisibility ? styles.cartVisible : styles.cartHidden}`}>
             <div className={styles.flex}>
@@ -58,11 +24,11 @@ function Cart({ state, dispatch, cartVisibility, handleCartVisibilityChange }) {
                     .map(item => 
                         <CartItem 
                         key={item.id}
-                        handleRemoveFromCart={handleRemoveFromCart}
-                        handleQuantityIncrement={handleQuantityIncrement}
-                        handleQuantityDecrement={handleQuantityDecrement}
-                        handleQuantityChange={handleQuantityChange}
-                        {...item} />
+                        handleRemoveFromCart={(id) => dispatch({ type: "deleted_product", productId: id })}
+                        handleQuantityIncrement={(id) => dispatch({ type: "incremented_product_quantity", productId: id })}
+                        handleQuantityDecrement={(id) => dispatch({ type: "decremented_product_quantity", productId: id })}
+                        handleQuantityChange={(id, value) => dispatch({ type: "changed_product_quantity", productId: id, quantity: value })}
+                        product={item} />
                     )}
             </div>
             <div className={styles.buy}>

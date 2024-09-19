@@ -2,6 +2,7 @@ import styles from "./ProductPage.module.css";
 import { useOutletContext, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Button from "../Button/Button";
+import QuantitySelector from "../QuantitySelector/QuantitySelector";
 
 const useProduct = (productId) => {
   const [product, setProduct] = useState(null);
@@ -38,14 +39,6 @@ function ProductPage() {
     setQuantity(isNaN(parseInt(value)) ? '' : parseInt(value))
   }
 
-  function handleIncrementQuantity() {
-    setQuantity(quantity + 1);
-  }
-
-  function handleDecrementQuantity() {
-    setQuantity(quantity - 1 !== 0 ? quantity - 1 : quantity)
-  }
-
   function handleAddToCart() {
     if(!state.cart.some(product => product.id == productId)) {
       dispatch({
@@ -53,14 +46,14 @@ function ProductPage() {
         newProduct: product
       })
       dispatch({
-        type: "changed_product_quantity",
+        type: "added_to_quantity",
         productId,
         quantity: quantity-1
       })
     }
     else
       dispatch({
-        type: "changed_product_quantity",
+        type: "added_to_quantity",
         productId,
         quantity
       })
@@ -80,26 +73,19 @@ function ProductPage() {
       <div className={styles.info}>
         <h1>{product.title.toUpperCase()}</h1>
         <h2>
-          {product.price}.00<strong>$</strong>
+          {product.price}<strong>$</strong>
         </h2>
         <p>{product.description.toUpperCase()}</p>
         <div className={styles.add}>
           <div className={styles.container}>
-            <button 
-            disabled={isNaN(quantity) || quantity == 0}
-            onClick={handleDecrementQuantity}>
-              -
-            </button>
-            <input 
-            type="tel" 
-            value={quantity}
-            onChange={handleQuantityChange}
-            />
-            <button
-            disabled={isNaN(quantity) || quantity == 0}
-            onClick={handleIncrementQuantity}>
-              +
-            </button>
+            <QuantitySelector
+             handleIncrement={() => setQuantity(quantity + 1)}
+             handleChange={handleQuantityChange}
+             handleDecrement={() => setQuantity(quantity - 1 !== 0 ? quantity - 1 : quantity)}
+             width="100px"
+            >
+              {quantity}
+            </QuantitySelector>
           </div>
           <Button
            isDisabled={isNaN(quantity) || quantity == 0}
