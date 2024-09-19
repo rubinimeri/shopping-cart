@@ -3,6 +3,7 @@ import styles from "./Shop.module.css";
 import { useEffect } from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import { useOutletContext } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const useProducts = () => {
   const [products, setProducts] = useState(null);
@@ -32,6 +33,9 @@ function Shop() {
   const [category, setCategory] = useState("men's clothing");
   const { state, dispatch } = useOutletContext();
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>A network error was encountered</p>;
+
   function handleAddToCart(e) {
     e.preventDefault();
     const { id } = e.target.closest('a');
@@ -43,13 +47,6 @@ function Shop() {
         newProduct
       })
   }
-
-  function handleCategoryChange(e) {
-    setCategory(e.target.textContent.toLowerCase());
-  }
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>A network error was encountered</p>;
 
   return (
     <main className={styles.main}>
@@ -67,38 +64,10 @@ function Shop() {
         <h1>{category.toUpperCase()}</h1>
         <h2>DOLOR SIT AMET</h2>
       </div>
-      <ul className={styles.categories}>
-        <li
-          onClick={handleCategoryChange}
-          className={category === "men's clothing" ? styles.active : ""}
-        >
-          MEN{"'"}S CLOTHING
-        </li>
-        <li
-          onClick={handleCategoryChange}
-          className={category === "women's clothing" ? styles.active : ""}
-        >
-          WOMEN{"'"}S CLOTHING
-        </li>
-        <li
-          onClick={handleCategoryChange}
-          className={category === "electronics" ? styles.active : ""}
-        >
-          ELECTRONICS
-        </li>
-        <li
-          onClick={handleCategoryChange}
-          className={category === "jewelery" ? styles.active : ""}
-        >
-          JEWELERY
-        </li>
-        <li
-          onClick={handleCategoryChange}
-          className={category === "see all" ? styles.active : ""}
-        >
-          SEE ALL
-        </li>
-      </ul>
+      <Categories 
+       category={category}
+       handleCategoryChange={(e) => setCategory(e.target.textContent.toLowerCase())}
+      />
       <div className={styles.productList}>
         {category !== "see all" ?
           products
@@ -121,6 +90,48 @@ function Shop() {
       </div>
     </main>
   );
+}
+
+function Categories({ category, handleCategoryChange }) {
+  return (
+    <ul className={styles.categories}>
+      <li
+        onClick={handleCategoryChange}
+        className={category === "men's clothing" ? styles.active : ""}
+      >
+        MEN{"'"}S CLOTHING
+      </li>
+      <li
+        onClick={handleCategoryChange}
+        className={category === "women's clothing" ? styles.active : ""}
+      >
+        WOMEN{"'"}S CLOTHING
+      </li>
+      <li
+        onClick={handleCategoryChange}
+        className={category === "electronics" ? styles.active : ""}
+      >
+        ELECTRONICS
+      </li>
+      <li
+        onClick={handleCategoryChange}
+        className={category === "jewelery" ? styles.active : ""}
+      >
+        JEWELERY
+      </li>
+      <li
+        onClick={handleCategoryChange}
+        className={category === "see all" ? styles.active : ""}
+      >
+        SEE ALL
+      </li>
+    </ul>
+  )
+}
+
+Categories.propTypes = {
+  category: PropTypes.string,
+  handleCategoryChange: PropTypes.func
 }
 
 export default Shop;
