@@ -38,8 +38,7 @@
     display: flex;
 }
 
-.add button,
-.add input {
+.add button {
     border: none;
     outline: none;
 }
@@ -47,25 +46,19 @@
 .add > button {
     background-color: black;
     color: white;
-    padding: 12px 2rem;
+    padding: 10px 2rem;
 }
 
 .add button {
     cursor: pointer;
 }
 
-.add input {
-    width: 18px;
-    font-size: 15px;
-}
-
 .container {
     display: flex;
-    border: #8a857b 1px solid;
+    align-items: center;
 }
 
 .container * {
     flex-shrink: 1;
-    background-color: #FAF6EE;
 }
 
